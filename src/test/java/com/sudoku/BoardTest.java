@@ -3,6 +3,8 @@ package com.sudoku;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class BoardTest {
@@ -36,5 +38,8 @@ class BoardTest {
 
         board.setGridBoard(2, 2, "9");
         Assertions.assertFalse(board.checkValidator(2, 2, 9));
+
+        List<BoardPosition> hiddenPosList = board.hideBoard(50);
+        Assertions.assertEquals(50, hiddenPosList.size());
     }
 }
