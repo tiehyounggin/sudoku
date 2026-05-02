@@ -87,6 +87,8 @@ public class Board {
                     return boardPosition;
                 }).toList();
 
+        Collections.shuffle(new ArrayList<>(boardPosList));
+
         return boardPosList;
     }
 

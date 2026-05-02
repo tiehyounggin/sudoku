@@ -34,10 +34,7 @@ public class User {
     public void command(Board board, String command, List<BoardPosition> boardPositions, CircularFifoQueue<String> commandHistory){
 
         if("hint".equalsIgnoreCase(command)){
-            List<BoardPosition> boardPositionsToShuffle = new ArrayList<>(boardPositions);
-            Collections.shuffle(boardPositionsToShuffle);
-
-            boardPositionsToShuffle.stream().filter(pos -> !pos.isFilled())
+            boardPositions.stream().filter(pos -> !pos.isFilled())
                     .findFirst()
                     .ifPresent(pos -> {
                 System.out.println("Hint: Cell " + Utils.convertRowColToAlphabet(pos.getRow(), pos.getCol() + 1) + " = " + pos.getPosCorrectValue());
