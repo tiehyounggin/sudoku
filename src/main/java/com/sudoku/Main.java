@@ -77,7 +77,7 @@ public class Main {
         //checker for size 2 command and pattern match
         //include check for pre filled positions
         if(userInputArr.length == 2){
-            if(userInputArr[0].matches("[A-I][0-9]") && (userInputArr[1].matches("[0-9]") || "clear".equalsIgnoreCase(userInputArr[1]))){
+            if(userInputArr[0].matches("[A-I][0-9]") && (userInputArr[1].matches("[1-9]") || "clear".equalsIgnoreCase(userInputArr[1]))){
                 int row = Utils.convertPositionAlphabetToRowInt(userInputArr[0]);
                 int col = Utils.convertPositionNumberToColInt(userInputArr[0]);
 
