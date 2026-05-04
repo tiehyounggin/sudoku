@@ -46,20 +46,61 @@ class UserTest {
     }
 
     @Test
+    void testPositionChangeClear() {
+        boardPositions.add(new BoardPosition("5", 0, 0, "", false));
+        boolean isSolved = user.positionChange(board, boardPositions, "A1", "clear");
+
+        assertTrue(outContent.toString().contains("Move accepted."));
+        Assertions.assertEquals("_", board.getGridboard(0, 0));
+
+        assertFalse(isSolved);
+    }
+
+    @Test
     void testCommandHint() {
         boardPositions.add(new BoardPosition("3", 1, 1, "", false));
         user.command(board, "hint", boardPositions, commandHistory);
         assertTrue(outContent.toString().contains("Hint: Cell B2 = 3"));
     }
 
-//    @Test
-//    void testCommandCheck() {
-//        commandHistory.add("A1 5");
-//        boardPositions.add(new BoardPosition("5", 0, 0, "5", true));
-//        board.setGridBoard(0, 0, "5");
-//        user.command(board, "check", boardPositions, commandHistory);
-//        assertTrue(outContent.toString().contains("No rule violations detected."));
-//    }
+    @Test
+    void testCommandCheckNoViolation() {
+        commandHistory.add("A1 5");
+        boardPositions.add(new BoardPosition("5", 0, 0, "5", true));
+        board.setGridBoard(0, 0, "5");
+        user.command(board, "check", boardPositions, commandHistory);
+        assertTrue(outContent.toString().contains("No rule violations detected."));
+    }
+
+    @Test
+    void testCommandCheckRowViolation() {
+        commandHistory.add("A1 5");
+        boardPositions.add(new BoardPosition("5", 0, 0, "5", true));
+        board.setGridBoard(0, 0, "5");
+        board.setGridBoard(0, 1, "5");
+        user.command(board, "check", boardPositions, commandHistory);
+        assertTrue(outContent.toString().contains("Number 5 already exists in Row A"));
+    }
+
+    @Test
+    void testCommandCheckColumnViolation() {
+        commandHistory.add("A1 5");
+        boardPositions.add(new BoardPosition("5", 0, 0, "5", true));
+        board.setGridBoard(0, 0, "5");
+        board.setGridBoard(1, 0, "5");
+        user.command(board, "check", boardPositions, commandHistory);
+        assertTrue(outContent.toString().contains("Number 5 already exists in Column 1"));
+    }
+
+    @Test
+    void testCommandCheckSmallGridViolation() {
+        commandHistory.add("A1 5");
+        boardPositions.add(new BoardPosition("5", 0, 0, "5", true));
+        board.setGridBoard(0, 0, "5");
+        board.setGridBoard(2, 2, "5");
+        user.command(board, "check", boardPositions, commandHistory);
+        assertTrue(outContent.toString().contains("Number 5 already exists in the same 3×3 subgrid"));
+    }
 
     @Test
     void testCommandShow() {
