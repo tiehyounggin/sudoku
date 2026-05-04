@@ -120,7 +120,7 @@ public class Board {
         }
 
         if(colOccurence > 1){
-            System.out.println("Number " + number + " already exists in Column " + col + 1);
+            System.out.println("Number " + number + " already exists in Column " + (col + 1));
             return false;
         }
 
