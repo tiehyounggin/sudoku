@@ -14,4 +14,8 @@ public class Utils {
     public static int convertPositionNumberToColInt(String alphabetWithNum){
         return Integer.parseInt(alphabetWithNum.substring(1, 2)) - 1;
     }
+
+    public static String convertRowIntToAlphabet(int row){
+        return Constant.ROW_ALPHABET.get(row);
+    }
 }

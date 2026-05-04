@@ -2,6 +2,8 @@ package com.sudoku;
 
 import java.util.*;
 
+import static com.sudoku.Utils.convertRowIntToAlphabet;
+
 public class Board {
     private String[][] gridBoard = new String[9][9];
 
@@ -106,7 +108,7 @@ public class Board {
         }
 
         if(rowOccurence > 1){
-            System.out.println("Number " + number + " already exists in Row " + (row + 1));
+            System.out.println("Number " + number + " already exists in Row " + convertRowIntToAlphabet(row + 1));
             return false;
         }
 
