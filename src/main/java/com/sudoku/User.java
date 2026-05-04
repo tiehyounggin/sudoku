@@ -1,10 +1,6 @@
 package com.sudoku;
 
-import org.apache.commons.collections4.queue.CircularFifoQueue;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class User {
 
@@ -31,7 +27,7 @@ public class User {
         return false;
     }
 
-    public void command(Board board, String command, List<BoardPosition> boardPositions, CircularFifoQueue<String> commandHistory){
+    public void command(Board board, String command, List<BoardPosition> boardPositions, LinkedList<String> commandHistory){
 
         if("hint".equalsIgnoreCase(command)){
             boardPositions.stream().filter(pos -> !pos.isFilled())

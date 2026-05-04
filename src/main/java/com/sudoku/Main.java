@@ -2,16 +2,14 @@ package com.sudoku;
 
 import org.apache.commons.collections4.queue.CircularFifoQueue;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
         User user = new User();
         Board board = new Board();
         List<BoardPosition> hiddenPosList;
-        CircularFifoQueue<String> commandHistory = new CircularFifoQueue<>(20);
+        LinkedList<String> commandHistory = new LinkedList<>();
         boolean isGameComplete = false;
 
 //        sudoku.Board boardAns = new sudoku.Board(board);
@@ -40,7 +38,14 @@ public class Main {
                 }
             }else if(userInputArr.length == 2){
                 if(!"clear".equalsIgnoreCase(userInputArr[1])){
-                    commandHistory.add(userInputArr[0] + " " + userInputArr[1]);
+                    if(!commandHistory.contains(userInput)){
+                        commandHistory.addLast(userInput);
+                    }
+                }else{
+                    String lastCommand = commandHistory.stream()
+                            .filter(command -> command.contains(userInputArr[0])).findFirst().get();
+
+                    commandHistory.removeLastOccurrence(lastCommand);
                 }
 
                 isGameComplete = user.positionChange(board, hiddenPosList, userInputArr[0], userInputArr[1]);

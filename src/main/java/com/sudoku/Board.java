@@ -106,7 +106,7 @@ public class Board {
         }
 
         if(rowOccurence > 1){
-            System.out.println("Number " + number + " already exists in Row " + row + 1);
+            System.out.println("Number " + number + " already exists in Row " + (row + 1));
             return false;
         }
 
